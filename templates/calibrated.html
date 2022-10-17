@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>GeoCal</title>
+    </head>
+    <body>
+        <header></header>
+        <main>
+            <h2>{{ filename }}</h2>
+            <div id='chart' class='chart'></div>
+            <br>
+            <div id="tabel"></div>
+        </main>
+        <footer></footer>
+        <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+        <script type='text/javascript'>
+            var graphs = {{graphJSON | safe}}
+
+            var pdata = []
+            var vdata = []
+            var adata = []
+            var sens  = []
+
+            var volt = {{ tegangan }}
+            var freq = {{ frekuensi }}
+
+            var tabel = `
+            <table>
+                <tr>
+                  <th>Puncak</th>
+                  <th>Lembah</th>
+                  <th>Amplitudo Total</th>
+                  <th>Sensitifitas</th>
+                </tr>
+            `
+
+            Plotly.plot('chart',graphs,{})
+
+            {%for i in range(0, 4)%}
+                pdata.push({{ pdata[i] }})
+                vdata.push({{ -vdata[i] }})
+            {%endfor%}
+
+            for(var i=0; i<4; i++){
+                adata.push(vdata[i]+pdata[i])
+                sens.push(0.00232889572086837*freq*(adata[i]/volt))
+
+                tabel += `
+                <tr>
+                  <th>${pdata[i]}</th>
+                  <th>${vdata[i]}</th>
+                  <th>${adata[i]}</th>
+                  <th>${sens[i]}</th>
+                </tr>
+                `
+            }
+            tabel += `
+            </table>
+            `
+            document.getElementById('tabel').innerHTML = tabel
+          </script>
+    </body>
+</html>

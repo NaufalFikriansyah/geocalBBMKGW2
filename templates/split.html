@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>GeoCal</title>
+    </head>
+    <body>
+        <header></header>
+        <main>
+            <h2>{{ text }}</h2>
+            <div id='chart' class='chart'></div>
+            <form method="get" action="{{ url_for('calibrate') }}">
+                <input type="text" name="filename" id="filename" style="display: none;" value="{{ text }}">
+                <span>Tegangan</span>
+                <input type="text" name="tegangan" id="tegangan">
+                <span>frekuensi</span>
+                <input type="text" name="frekuensi" id="frekuensi">
+                <br>
+                <p>Cacah gelombang dari</p>
+                <span>jam ke-</span>
+                <input type="text" name="jamsatus" id="jamsatus">
+                <span>menit ke-</span>
+                <input type="text" name="menitsatus" id="menitsatus">
+                <br>
+                <p>Sampai</p>
+                <span>jam ke-</span>
+                <input type="text" name="jamsatue" id="jamsatue">
+                <span>menit ke-</span>
+                <input type="text" name="menitsatue" id="menitsatue">
+                <br>
+                <input type="submit" value="Mulai kalibrasi">
+            </form>
+        </main>
+        <footer></footer>
+        <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+        <script type='text/javascript'>
+            var graphs = {{graphJSON | safe}};
+            Plotly.plot('chart',graphs,{});
+          </script>
+    </body>
+</html>
