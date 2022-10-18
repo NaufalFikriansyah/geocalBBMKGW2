@@ -1,17 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
     <head>
         <title>GeoCal</title>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        <header></header>
-        <main>
-            <form method=post enctype=multipart/form-data>
-                <input type=file name=file>
-                <input type=submit value=Upload>
-            </form>
-        </main>
-        <footer></footer>
-        
+        <div class="container">
+            <header class="text-center">
+                <h2>GeoCal</h2>
+                <p>Web-Based app for accelerometer data calibration</p>
+            </header>
+            <main>
+                <h5 class="text-center">Silahkan upload file MSEED di sini.</h5>
+                <form method="post" enctype="multipart/form-data">
+                    <div class="input-group mb-3">
+                        <input type="file" class="form-control" name="file" id="file">
+                        <input class="btn btn-outline-secondary" type="submit" id="file"></input>
+                      </div>
+                </form>
+            </main>
+        </div>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
     </body>
 </html>

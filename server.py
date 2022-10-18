@@ -71,6 +71,10 @@ def split(name):
     df = pd.DataFrame(alldata)
     
     fig = px.line(df, x='times', y='datas')
+    fig.update_layout(
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)'
+    )
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
 
     return render_template('split.html', graphJSON=graphJSON, text=name)
@@ -136,6 +140,10 @@ def calibrate():
     fig = px.line(df, x='times', y='datas')
     fig.add_trace(go.Scatter(mode="markers", x=peak, y=datapeak['peak_heights'], name="puncak"))
     fig.add_trace(go.Scatter(mode="markers", x=valley, y=vdata, name="lembah"))
+    fig.update_layout(
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)'
+    )
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     
     '''

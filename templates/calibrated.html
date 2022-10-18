@@ -2,16 +2,21 @@
 <html>
     <head>
         <title>GeoCal</title>
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/style.css">
     </head>
     <body>
-        <header></header>
+        <header class="text-center">
+            <h3>File untuk:</h3>
+            <h4>{{ filename }}</h4>
+        </header>
         <main>
-            <h2>{{ filename }}</h2>
-            <div id='chart' class='chart'></div>
-            <br>
-            <div id="tabel"></div>
+            <div class="container text-center">
+                <div id='chart' class='chart'></div>
+                <br>
+                <div id="tabel"></div>
+            </div>
         </main>
-        <footer></footer>
         <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
         <script type='text/javascript'>
             var graphs = {{graphJSON | safe}}
@@ -25,13 +30,16 @@
             var freq = {{ frekuensi }}
 
             var tabel = `
-            <table>
-                <tr>
-                  <th>Puncak</th>
-                  <th>Lembah</th>
-                  <th>Amplitudo Total</th>
-                  <th>Sensitifitas</th>
-                </tr>
+            <table class="table table-striped">
+                <thead class="table-light">
+                    <tr>
+                        <th>Puncak</th>
+                        <th>Lembah</th>
+                        <th>Amplitudo Total</th>
+                        <th>Sensitifitas</th>
+                    </tr>
+                </thead>
+                <tbody>
             `
 
             Plotly.plot('chart',graphs,{})
@@ -47,17 +55,20 @@
 
                 tabel += `
                 <tr>
-                  <th>${pdata[i]}</th>
-                  <th>${vdata[i]}</th>
-                  <th>${adata[i]}</th>
-                  <th>${sens[i]}</th>
+                  <td>${pdata[i]}</td>
+                  <td>${vdata[i]}</td>
+                  <td>${adata[i]}</td>
+                  <td>${sens[i]}</td>
                 </tr>
                 `
             }
             tabel += `
+            </tbody>
             </table>
             `
             document.getElementById('tabel').innerHTML = tabel
-          </script>
+        </script>
+        <script src="../js/jquery.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
     </body>
 </html>

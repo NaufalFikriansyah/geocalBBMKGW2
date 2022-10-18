@@ -1,40 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
     <head>
         <title>GeoCal</title>
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/style.css">
     </head>
     <body>
-        <header></header>
+        <header class="text-center">
+            <h3>File untuk:</h3>
+            <h4>{{ text }}</h4>
+        </header>
         <main>
-            <h2>{{ text }}</h2>
-            <div id='chart' class='chart'></div>
-            <form method="get" action="{{ url_for('calibrate') }}">
-                <input type="text" name="filename" id="filename" style="display: none;" value="{{ text }}">
-                <span>Tegangan</span>
-                <input type="text" name="tegangan" id="tegangan">
-                <span>frekuensi</span>
-                <input type="text" name="frekuensi" id="frekuensi">
+            <div class="container">
+                <div id='chart' class='chart'></div>
                 <br>
-                <p>Cacah gelombang dari</p>
-                <span>jam ke-</span>
-                <input type="text" name="jamsatus" id="jamsatus">
-                <span>menit ke-</span>
-                <input type="text" name="menitsatus" id="menitsatus">
                 <br>
-                <p>Sampai</p>
-                <span>jam ke-</span>
-                <input type="text" name="jamsatue" id="jamsatue">
-                <span>menit ke-</span>
-                <input type="text" name="menitsatue" id="menitsatue">
-                <br>
-                <input type="submit" value="Mulai kalibrasi">
-            </form>
+                <form method="get" action="{{ url_for('calibrate') }}">
+                    <input type="text" name="filename" id="filename" style="display: none;" value="{{ text }}">
+                    <h5>Data Akselerometer</h5>
+                    <span>Tegangan</span>
+                    <input type="text" name="tegangan" id="tegangan">
+                    <span>frekuensi</span>
+                    <input type="text" name="frekuensi" id="frekuensi">
+                    <br>
+                    <br>
+                    <h5>Cacah gelombang</h5>
+                    <b>Dari  </b>
+                    <span>jam ke-</span>
+                    <span><input type="text" name="jamsatus" id="jamsatus"></span>
+                    <span>menit ke-</span>
+                    <span><input type="text" name="menitsatus" id="menitsatus"></span>
+                    <br>
+                    <br>
+                    <b>Sampai</b>
+                    <span>jam ke-</span>
+                    <span><input type="text" name="jamsatue" id="jamsatue"></span>
+                    <span>menit ke-</span>
+                    <span><input type="text" name="menitsatue" id="menitsatue"></span>
+                    <br>
+                    <br>
+                    <input type="submit" value="Mulai kalibrasi">
+                </form>
+            </div>
         </main>
-        <footer></footer>
         <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
         <script type='text/javascript'>
             var graphs = {{graphJSON | safe}};
             Plotly.plot('chart',graphs,{});
-          </script>
+        </script>
+        <script src="../js/jquery.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
     </body>
 </html>
